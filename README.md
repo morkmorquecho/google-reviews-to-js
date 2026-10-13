@@ -51,7 +51,6 @@ Una lista JSON donde cada reseña usa estos campos (los que genera el scraper):
 | `Rating` | `rating` |
 | `Description` | `text` |
 | `ProfilePicture` | `avatar` |
-| `author_url` | `url` |
 | `posted_at_unix_micros` | Ordenar de más reciente a más antigua |
 
 ## Formato de salida
@@ -71,7 +70,7 @@ export const googleReviews = {
       date: 'Hace 3 meses',
       rating: 5,
       text: 'Súper recomendable! Me dio muchísima confianza la doctora, muy amable y realista.',
-      url: 'https://www.google.com/maps/contrib/.../reviews',
+      url: 'https://www.google.com/maps/search/?api=1&query=Mi+clinica',
       avatar: 'https://lh3.googleusercontent.com/...',
       avatarColor: '#7cc6e0',
     },
@@ -113,7 +112,7 @@ const failedAvatars = reactive({});
 ## Notas
 
 - El color de avatar se elige de la paleta según el nombre (hash), así que es estable: no cambia cada vez que regeneras el archivo. Puedes editar la lista `PALETTE` en el script.
-- `url` usa `author_url` (perfil del autor en Google Maps), porque el JSON no incluye un enlace directo a cada reseña. Si falta, se usa `--maps-url`.
+- El campo `url` de cada reseña es siempre el valor de `--maps-url`, es decir, la página de reseñas de tu lugar en Google Maps. No se usa el perfil del autor (`author_url`), para que quien haga clic en "Leer reseña completa" llegue a tu ficha y no al perfil de otra persona.
 - El JSON original contiene nombres y fotos de personas reales. Considera no subirlo al repositorio (añádelo a `.gitignore`) y versionar solo el `googleReviews.js` generado.
 
 ## Estructura sugerida
